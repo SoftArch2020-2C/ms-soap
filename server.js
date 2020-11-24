@@ -16,13 +16,13 @@ const URL = "https://gateway.froid.ml/graphql"; //proxy url
 
 var service = {
     ws: {
-        questionList: {
-            questions : async function(args) {
+        asignaturesList: {
+            asignatures : async function(args) {
                 var id_usuario = args.id_usuario
-                const questions = await axios.post(URL, {
+                const asignatures = await axios.post(URL, {
                 query: `
                   query {
-                    listMaterias(id_usuario : "${id_usuario}"){
+                    listMaterias(id_usuario : ${args.id_usuario}){
                         id
                         id_usuario
                         id_semestre
@@ -35,14 +35,12 @@ var service = {
                     }
                     `
                   })
-                if(questions &&  questions.data &&  questions.data.data &&  questions.data.data.listMaterias){
+                if(asignatures &&  asignatures.data &&  asignatures.data.data &&  asignatures.data.data.listMaterias){
 
-                    const asignature = questions.data.data.listMaterias[0];
-
-                    console.log("entre1");
+                    const asignature = asignatures.data.data.listMaterias[0];                    
                 
                     return {    
-                                res : "Random question from: "+id_usuario,
+                                res : "Random question from: "+ id_usuario,
                                 id : asignature.id,
                                 id_usuario : asignature.id_usuario,
                                 id_semestre : asignature.id_semestre,
@@ -53,12 +51,7 @@ var service = {
                                 nota : asignature.nota};
                 }
                 else{
-                  if(questions.data.data.listMaterias.ERROR){
-                      console.log("entre1");
-                    return {res: questions.data.data.listMaterias.ERROR}
-                  }
-
-                  console.log("entre1");
+                  
                   return {res: "ERROR"};
                 }
             },
@@ -69,7 +62,7 @@ var service = {
 
  async function test(){
      var query="";
-    const questions = await axios.post(URL, {
+    const asignatures = await axios.post(URL, {
         query: `
             query {
             listMaterias(id_usuario : 31){
@@ -86,9 +79,9 @@ var service = {
             `
         })
 
-    if(questions &&  questions.data &&  questions.data.data &&  questions.data.data.listMaterias){
+    if(asignatures &&  asignatures.data &&  asignatures.data.data &&  asignatures.data.data.listMaterias){
 
-       const asignature = questions.data.data.listMaterias[0];
+       const asignature = asignatures.data.data.listMaterias[0];
 
        console.log({    id : asignature.id,
                                 id_usuario : asignature.id_usuario,
@@ -154,9 +147,7 @@ var service = {
     app.listen(3000, function(){
         //Note: /wsdl route will be handled by soap module
         //and all other routes & middleware will continue to work
-        soap.listen(app, '/asignatures', service, xml, function(){
-            console.log('server initialized');
-        });
+        soap.listen(app, { path: '/asignatures', services: service, xml: xml,  enableChunkedEncoding: false} );
     });
 
     /*

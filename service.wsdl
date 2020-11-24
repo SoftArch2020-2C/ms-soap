@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://localhost:3000/asignatures" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="questionsrng" targetNamespace="http://localhost:3000/asignatures">
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://3.236.231.218:3000/asignatures" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="asignatures" targetNamespace="http://3.236.231.218:3000/asignatures">
 
-<wsdl:message name="questionsRequest">
+<wsdl:message name="asignaturesRequest">
     <wsdl:part name="id_usuario" type="xsd:int"></wsdl:part>
   </wsdl:message>
 
 
-  <wsdl:message name="questionsResponse">
+  <wsdl:message name="asignaturesResponse">
     <wsdl:part name="res" type="xsd:string"></wsdl:part>
     <wsdl:part name="id" type="xsd:int"></wsdl:part>
     <wsdl:part name="id_usuario" type="xsd:int"></wsdl:part>
@@ -19,25 +19,25 @@
   </wsdl:message>
 
 
-  <wsdl:portType name="questionsPort">
-    <wsdl:operation name="questions">
-      <wsdl:input message="tns:questionsRequest"></wsdl:input>
-      <wsdl:output message="tns:questionsResponse"></wsdl:output>
+  <wsdl:portType name="asignaturesPort">
+    <wsdl:operation name="asignatures">
+      <wsdl:input message="tns:asignaturesRequest"></wsdl:input>
+      <wsdl:output message="tns:asignaturesResponse"></wsdl:output>
     </wsdl:operation>
    </wsdl:portType>
 
-  <wsdl:binding name="questionsBinding" type="tns:questionsPort">
+  <wsdl:binding name="asignaturesBinding" type="tns:asignaturesPort">
     <soap:binding style="rpc"
                   transport="http://schemas.xmlsoap.org/soap/http"/>
-    <wsdl:operation name="questions">
-      <soap:operation soapAction="questions"/>
+    <wsdl:operation name="asignatures">
+      <soap:operation soapAction="asignatures"/>
       <wsdl:input>
-        <soap:body namespace="http://localhost:3000/asignatures"
+        <soap:body namespace="http://3.236.231.218:3000/asignatures"
                    use="literal"
                    encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
       </wsdl:input>
       <wsdl:output>
-       <soap:body namespace="http://localhost:3000/asignatures"
+       <soap:body namespace="http://3.236.231.218:3000/asignatures"
                   use="literal"
                   encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
      </wsdl:output>
@@ -46,8 +46,8 @@
   </wsdl:binding>
 
   <wsdl:service name="ws">
-    <wsdl:port name="questionList" binding="tns:questionsBinding">
-      <soap:address location="http://localhost:3000/asignatures"/>
+    <wsdl:port name="asignaturesList" binding="tns:asignaturesBinding">
+      <soap:address location="http://3.236.231.218:3000/asignatures"/>
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>
