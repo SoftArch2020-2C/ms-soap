@@ -7,6 +7,8 @@ var axios = require('axios');
 const cors = require('cors');
 const path = require("path");
 var http = require('http');
+var connect = require('connect');
+var logger = require('morgan');
 
 var api = require('./api');
 var app = express();
@@ -113,12 +115,27 @@ var service = {
 
     var xml = require('fs').readFileSync('service.wsdl', 'utf8');
 
-    //http server example
-    var server = http.createServer(function(request,response) {
-        response.end('404: Not Found: ' + request.url);
+    var app2 = connect()
+
+        .use(logger())        
+
+        
+
+        .use(function(req, res){
+
+        res.setHeader("Access-Control-Allow-Origin", "http://example.com");
+        res.end('hello world\n');
+
     });
 
-    server.listen(3000);
+   
+    var server = http.createServer(app2);
+
+    server.listen(3000, function () {
+
+        console.log('server is listening');
+    }); 
+
     soap.listen(server, '/asignatures', service, xml);
     console.log("server listening")
     console.log(service);
