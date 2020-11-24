@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://3.236.231.218:3000/asignatures" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="asignatures" targetNamespace="http://3.236.231.218:3000/asignatures">
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://localhost:3000/asignatures" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="asignatures" targetNamespace="http://localhost:3000/asignatures">
 
 <wsdl:message name="asignaturesRequest">
     <wsdl:part name="id_usuario" type="xsd:int"></wsdl:part>
@@ -32,12 +32,12 @@
     <wsdl:operation name="asignatures">
       <soap:operation soapAction="asignatures"/>
       <wsdl:input>
-        <soap:body namespace="http://3.236.231.218:3000/asignatures"
+        <soap:body namespace="http://localhost:3000/asignatures"
                    use="literal"
                    encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
       </wsdl:input>
       <wsdl:output>
-       <soap:body namespace="http://3.236.231.218:3000/asignatures"
+       <soap:body namespace="http://localhost:3000/asignatures"
                   use="literal"
                   encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
      </wsdl:output>
@@ -47,7 +47,7 @@
 
   <wsdl:service name="ws">
     <wsdl:port name="asignaturesList" binding="tns:asignaturesBinding">
-      <soap:address location="http://3.236.231.218:3000/asignatures"/>
+      <soap:address location="http://localhost:3000/asignatures"/>
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

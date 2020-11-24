@@ -164,29 +164,32 @@ var service = {
     console.log("server listening")
     console.log(service);
 
-    app.use(function(req,res,next){
+    */
+    
+
+    var app2 = express();
+
+
+    app2.use(function(req,res,next){
         res.header('Access-Control-Allow-Origin: *');
         next();
     })
 
-    const corsOptions = {
-        origin: '*',
-        //origin: 'http://127.0.0.1:3000',
-    };
-    app.use(express.json({limit: '10mb'}));
+
+    app2.use(express.json({limit: '10mb'}));
     //To avoid CORS errors
-    app.use(cors(corsOptions));
+    app2.use(cors(corsOptions));
 
     //Use public dirname to serve static files
-    app.use(express.static(__dirname + '/public'));
+    app2.use(express.static(__dirname + '/public'));
     //app.use('/uploads/drivers',express.static(path.join(__dirname, 'public/uploads/drivers')));
 
     //Require route files
-    app.use('/interface', api.router);
+    app2.use('/interface', api.router);
 
     // Start server in specific port
-    app.listen(3001, function(){
+    app2.listen(3001, function(){
         // Actions on ready
         console.log('Server: Server is running');
-    });*/
+    });
 
