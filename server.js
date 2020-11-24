@@ -37,7 +37,7 @@ var service = {
                   })
                 if(asignatures &&  asignatures.data &&  asignatures.data.data &&  asignatures.data.data.listMaterias){
 
-                    const asignature = asignatures.data.data.listMaterias[0];                    
+                    const asignature = asignatures.data.data.listMaterias[Math.floor(Math.random() * asignatures.data.data.listMaterias.length)];                    
                 
                     return {    
                                 res : "Random question from: "+ id_usuario,
