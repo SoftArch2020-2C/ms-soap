@@ -7,7 +7,6 @@
 
 
   <wsdl:message name="questionsResponse">
-    <wsdl:part name="res" type="xsd:string"></wsdl:part>
     <wsdl:part name="id" type="xsd:int"></wsdl:part>
     <wsdl:part name="id_usuario" type="xsd:int"></wsdl:part>
     <wsdl:part name="id_semestre" type="xsd:int"></wsdl:part>
