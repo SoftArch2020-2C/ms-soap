@@ -1,5 +1,3 @@
-/*jslint node: true */
-"use strict";
 
 
 var soap = require('soap');
@@ -39,8 +37,12 @@ var service = {
                 if(questions &&  questions.data &&  questions.data.data &&  questions.data.data.listMaterias){
 
                     const asignature = questions.data.data.listMaterias[0];
+
+                    console.log("entre1");
                 
-                    return {    id : asignature.id,
+                    return {    
+                                res : "Random question from: "+id_usuario,
+                                id : asignature.id,
                                 id_usuario : asignature.id_usuario,
                                 id_semestre : asignature.id_semestre,
                                 id_tipologia : asignature.id_tipologia,
@@ -51,8 +53,11 @@ var service = {
                 }
                 else{
                   if(questions.data.data.listMaterias.ERROR){
+                      console.log("entre1");
                     return {res: questions.data.data.listMaterias.ERROR}
                   }
+
+                  console.log("entre1");
                   return {res: "ERROR"};
                 }
             },
@@ -106,17 +111,17 @@ var service = {
     
  }
 
-    var xml = require('fs').readFileSync('myservice.wsdl', 'utf8');
+    var xml = require('fs').readFileSync('service.wsdl', 'utf8');
 
     //http server example
     var server = http.createServer(function(request,response) {
-    response.end('404: Not Found: ' + request.url);
+        response.end('404: Not Found: ' + request.url);
     });
 
     server.listen(3000);
     soap.listen(server, '/asignatures', service, xml);
     console.log("server listening")
-    console.log(test());
+    console.log(service);
 
     app.use(function(req,res,next){
         res.header('Access-Control-Allow-Origin: *');

@@ -2,19 +2,20 @@
 <wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://localhost:3000/asignatures" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="questionsrng" targetNamespace="http://localhost:3000/asignatures">
 
 <wsdl:message name="questionsRequest">
-    <wsdl:part name="id_usuario" type="xsd:string"></wsdl:part>
+    <wsdl:part name="id_usuario" type="xsd:int"></wsdl:part>
   </wsdl:message>
 
 
   <wsdl:message name="questionsResponse">
-    <wsdl:part name="id" type="xsd:string"></wsdl:part>
-    <wsdl:part name="id_usuario" type="xsd:string"></wsdl:part>
-    <wsdl:part name="id_semestre" type="xsd:string"></wsdl:part>
-    <wsdl:part name="id_tipologia" type="xsd:string"></wsdl:part>
+    <wsdl:part name="res" type="xsd:string"></wsdl:part>
+    <wsdl:part name="id" type="xsd:int"></wsdl:part>
+    <wsdl:part name="id_usuario" type="xsd:int"></wsdl:part>
+    <wsdl:part name="id_semestre" type="xsd:int"></wsdl:part>
+    <wsdl:part name="id_tipologia" type="xsd:int"></wsdl:part>
     <wsdl:part name="nombre" type="xsd:string"></wsdl:part>
     <wsdl:part name="prerequisitos" type="xsd:string"></wsdl:part>
-    <wsdl:part name="creditos" type="xsd:string"></wsdl:part>
-    <wsdl:part name="nota" type="xsd:string"></wsdl:part>
+    <wsdl:part name="creditos" type="xsd:int"></wsdl:part>
+    <wsdl:part name="nota" type="xsd:int"></wsdl:part>
   </wsdl:message>
 
 
