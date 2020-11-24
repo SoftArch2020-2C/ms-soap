@@ -11,7 +11,6 @@ var connect = require('connect');
 var logger = require('morgan');
 
 var api = require('./api');
-var app = express();
 
 const URL = "https://gateway.froid.ml/graphql"; //proxy url
 
@@ -115,6 +114,7 @@ var service = {
 
     var xml = require('fs').readFileSync('service.wsdl', 'utf8');
 
+    /*
     var app2 = connect()
 
         .use(logger())        
@@ -126,7 +126,40 @@ var service = {
         res.setHeader("Access-Control-Allow-Origin", "http://example.com");
         res.end('hello world\n');
 
+    });*/
+
+
+    var app = express();
+
+
+    app.use(function(req,res,next){
+        res.header('Access-Control-Allow-Origin: *');
+        next();
+    })
+
+    const corsOptions = {
+        origin: '*',
+        //origin: 'http://127.0.0.1:3000',
+    };
+    app.use(express.json({limit: '10mb'}));
+    //To avoid CORS errors
+    app.use(cors(corsOptions));
+
+    //Use public dirname to serve static files
+    app.use(express.static(__dirname + '/public'));
+    //app.use('/uploads/drivers',express.static(path.join(__dirname, 'public/uploads/drivers')));
+
+    //body parser middleware are supported (optional)
+    app.use(bodyParser.raw({type: function(){return true;}, limit: '5mb'}));
+    app.listen(3000, function(){
+        //Note: /wsdl route will be handled by soap module
+        //and all other routes & middleware will continue to work
+        soap.listen(app, '/asignatures', service, xml, function(){
+            console.log('server initialized');
+        });
     });
+
+    /*
 
    
     var server = http.createServer(app2);
@@ -164,5 +197,5 @@ var service = {
     app.listen(3001, function(){
         // Actions on ready
         console.log('Server: Server is running');
-    });
+    });*/
 
